@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trivia Quiz</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome & Pixeden Icon Stroke icon font-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/pe-icon-7-stroke.css">
+    <!-- lightbox-->
+    <link rel="stylesheet" href="css/lightbox.min.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body class="home">
+    <!-- navbar-->
+    <header class="header">
+      <div role="navigation" class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header"><a href="index.html" class="navbar-brand">Trivia Quiz</a>
+            <div class="navbar-buttons">
+              <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="fa fa-align-justify"></i></button>
+            </div>
+          </div>
+          <div id="navigation" class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="index.html">Home</a></li>
+            </ul><a href="#" data-toggle="modal" data-target="#login-modal" class="btn navbar-btn btn-white pull-left"><i class="fa fa-sign-in"></i>Log in</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- *** LOGIN MODAL ***_________________________________________________________
+    -->
+    <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+            <h4 id="Login" class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form action="customer-orders.html" method="post">
+              <div class="form-group">
+                <input id="username" type="text" placeholder="username" class="form-control">
+              </div>
+              <div class="form-group">
+                <input id="password" type="password" placeholder="password" class="form-control">
+              </div>
+              <p class="text-center">
+                <button type="button" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
+              </p>
+            </form>
+            <!--<p class="text-center text-muted">Not registered yet?</p>
+            <p class="text-center text-muted"><a href="#"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- *** LOGIN MODAL END ***-->
+    <div id="carousel-home" data-ride="carousel" class="carousel slide carousel-fullscreen carousel-fade">
+
+      <!-- Wrapper for slides-->
+      <div role="listbox" class="carousel-inner">
+        <div style="background-image: url('img/carousel3.jpg');" class="item active">
+          <div class="overlay"></div>
+          <div class="carousel-caption">
+            <h1 class="super-heading">Trivia Quiz</h1>
+            <p class="super-paragraph">A Simulation Test Questions by Fadhilah Jasman</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="background-gray-lightest negative-margin">
+      <div class="container">
+        <h1>Let's Go Show Your Talent.</h1>
+        <p class="lead">Let Us Show Your Talent Through The Given Test Simulation.</p>
+        <p> <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-ghost">Login   </a></p>
+      </div>
+    </section>
+    
+    <footer class="footer">
+      <div class="footer__copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p>&copy;copyright 2018 by Fadhilah Jasman</p>
+            </div>
+            <div class="col-md-6">
+              <p class="credit">Template by <a href="https://bootstrapious.com/free-templates" class="external">Fadhilah Jasman</a></p>
+              <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"> </script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/front.js"></script><!-- substitute:livereload -->
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
+    <!---->
+    <script>
+        //$.cookie("username", username, { expires: -1, path: '/'});
+        var cookieUsername = $.cookie("username");
+        if(cookieUsername != null)
+            window.location.replace("/fadhilahquiz/simulasi.html");
+
+        $("#login-modal").find(".fa-sign-in").parent().click(login());
+        //$("#tombol-login-2").click(login());
+
+
+        function login()
+        {
+            return function(){
+                var username = $("#login-modal").find("#username").val();
+                var password = $("#login-modal").find("#password").val();
+                if((username == "fadhilahcantik" && password == "123") ||
+                  (username == "cecan" && password == "cecan") ||
+                  (username == "facan" && password == "facan"))
+                {
+                    $.cookie("username", username, { expires: 9999, path: '/' });
+                    window.location.replace("/fadhilahquiz/simulasi.html");
+                }
+                else
+                    alert('Username dan/atau password salah.');
+            }
+        }
+    </script>
+  </body>
+</html>

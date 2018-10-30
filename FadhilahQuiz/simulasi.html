@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trivia Quiz</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome & Pixeden Icon Stroke icon font-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/pe-icon-7-stroke.css">
+    <!-- lightbox-->
+    <link rel="stylesheet" href="css/lightbox.min.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    <style>
+        body {
+            background: url("login.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- navbar-->
+    <header class="header">
+      <div role="navigation" class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header"><a href="index.html" class="navbar-brand">Trivia Quiz</a>
+            <div class="navbar-buttons">
+              <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="fa fa-align-justify"></i></button>
+            </div>
+          </div>
+          <div id="navigation" class="collapse navbar-collapse navbar-right">
+              <ul class="nav navbar-nav">
+                <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle"><span id="username-terlogin">username</span><b class="caret"></b></a>
+                <ul class="dropdown-menu" id="menu-akun">
+                  <li id="log-out"><a>Logout</a></li>
+                </ul>
+              </li>
+              </ul>
+              <!--<a href="#" data-toggle="modal" data-target="#login-modal" class="btn navbar-btn btn-ghost pull-left"><i class="fa fa-sign-out"></i>Log Out</a>-->
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- *** LOGIN MODAL ***_________________________________________________________
+    -->
+    <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+            <h4 id="Login" class="modal-title">Customer login</h4>
+          </div>
+          <div class="modal-body">
+            <form action="customer-orders.html" method="post">
+              <div class="form-group">
+                <input id="email_modal" type="text" placeholder="email" class="form-control">
+              </div>
+              <div class="form-group">
+                <input id="password_modal" type="password" placeholder="password" class="form-control">
+              </div>
+              <p class="text-center">
+                <button type="button" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+              </p>
+            </form>
+            <p class="text-center text-muted">Not registered yet?</p>
+            <p class="text-center text-muted"><a href="#"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- *** LOGIN MODAL END ***-->
+    <section>
+      <div class="container">
+        <div id="bagian-loading">
+          <h1>Loading</h1>
+          <p class="lead">please wait,for the question is being loaded...</p>
+        </div>
+        <div id="bagian-ketentuan">
+          <h1>Simulation</h1>
+          <p class="lead">This simulation answer online test questions.The following are the rules for you must answer question</p>
+          <ul>
+              <li>This question consists of 2 level</li>
+              <li>This simulation consists of <span></span>10 questions</li>
+              <li>This question consists of 3 option</li>
+              <li>Good Luck!</li>
+          </ul>
+          <div class="form-group">
+              <label for="sel1">Level</label>
+              <select class="form-control" id="daftar-level">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+              </select>
+          </div>
+          <p><a id="tombol-mulai" class="btn btn-primary">Start</a></p>
+        </div>
+        <div id="container-soal">
+            <h1>Question</h1>
+            <h3><span class="label label-primary" id="level-soal">1/10</span></h3>
+            <p>
+              <a id="tombol-sebelumnya" class="btn btn-primary">Back</a>
+              <a id="tombol-berikutnya" class="btn btn-primary">Next</a>
+            </p>
+            <div id="bagian-soal">
+                <p id="isi-soal" class="lead">Ada soal yang sedang bertengger...</p>
+                <div class="radio">
+                    <label name="pilihan-soal" id="1">
+                      <input type="radio" name="pilihan-soal" value="A">
+                        <span>Option 1</span>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label name="pilihan-soal" id="2"><input type="radio" name="pilihan-soal" value="B"><span>Pilihan 2</span></label>
+                </div>
+                <div class="radio">
+                    <label name="pilihan-soal" id="3"><input type="radio" name="pilihan-soal" value="C"><span>Pilihan 3</span></label>
+                </div>
+                <br>
+              </div>
+              <div id="bagian-nomor-soal">
+                  <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Number Question</div>
+                        <div class="panel-body"><div id="isi-nomor-soal"></div></div>
+                    </div>
+                  </div>
+                  <br>
+                  <a id="tombol-selesai" class="btn btn-primary">Finish</a>
+              </div>
+          </div>
+      <div id="container-konfirmasi-sudah-menjawab-soal">
+          <h1>Question</h1>
+          <p class="lead">Are you sure you want to end the answer to the question? (This action can't be undone)</p>
+          <a id="tombol-akhiri" class="btn btn-success">Finish</a>
+          <a id="tombol-kembali" class="btn btn-primary">Back</a>
+      </div>
+      <div id="container-hasil">
+          <h1>Result</h1>
+          <p id="kesimpulan" class="lead">Conclusion Test</p>
+          <p>Salah: <span id="salah">0</span></p>
+          <p>Benar: <span id="benar">0</span></p>
+          <p>Nilai: <span id="nilai">0</span></p>
+          <a id="tombol-lakukan-simulasi-lagi" class="btn btn-primary">Retry</a>
+          <br><br>
+          <p class="lead">Solution</p>
+          <div class="table-responsive">          
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Question</th>
+                  <th>Option 1</th>
+                  <th>Option 2</th>
+                  <th>Option 3</th>
+                  <th>Your Answer</th>
+                  <th>Correct Answer</th>
+                  <th>Conclusion</th>
+                </tr>
+              </thead>
+              <tbody id="pembahasan">
+                <tr>
+                  <td>1</td>
+                  <td>Hewan apa yang berkaki empat</td>
+                  <td>Sapi</td>
+                  <td>Ayam</td>
+                  <td>Ular</td>
+                  <td>Ayam</td>
+                  <td>Sapi</td>
+                  <td><span class="label label-alert">False</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--<footer class="footer">
+      <div class="footer__copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p>&copy;2017 Your name goes here</p>
+            </div>
+            <div class="col-md-6">
+              <p class="credit">Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious templates</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>-->
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"> </script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/front.js"></script><!-- substitute:livereload -->
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
+    <!---->
+    <script>
+      var usernameCookie = $.cookie("username");
+      if(usernameCookie == null)
+      {
+          window.location.replace("/fadhilahquiz");
+      }
+      else
+      {
+          $(".navbar-nav").find("#username-terlogin").text(usernameCookie);
+          $("#menu-akun").find("#log-out").click(function(){
+              $.cookie("username", "", { expires: -1, path: '/' })
+              window.location.replace("/FadhilahQuiz");
+          });
+      }
+
+      var daftarSoalKeseluruhan = new Array();
+      var daftarSoal = new Array();
+      var daftarJawaban = new Array();
+      var indeksSoal = 0;
+      var kkm = 70;
+      semuaDisembunyikanKecualiLoading();
+      $("#daftar-level").empty();
+
+
+      $.get('Soal.txt', function(data) {
+          daftarSoalKeseluruhan = JSON.parse(data);
+
+          var angkaLevelSebelumnya = 0;
+          for(var i = 0; i < daftarSoalKeseluruhan.length; i++)
+          {
+              if(i == 0)
+              {
+                  angkaLevelSebelumnya = daftarSoalKeseluruhan[i]["level"];
+                  $("#daftar-level").append("<option>" + angkaLevelSebelumnya + "</option>");
+              }
+              else
+              {
+                  if(daftarSoalKeseluruhan[i]["level"] != angkaLevelSebelumnya)
+                  {
+                      angkaLevelSebelumnya = daftarSoalKeseluruhan[i]["level"];
+                      $("#daftar-level").append("<option>" + angkaLevelSebelumnya + "</option>");
+                  }
+              }
+          }
+
+          for(var i = 0; i < daftarSoal.length; i++)
+          {
+            daftarJawaban.push(-1);
+          }
+
+          inisialisasiAwal();
+      });
+
+      function semuaDisembunyikanKecualiLoading()
+      {
+          $("#bagian-loading").show();
+          $("#bagian-ketentuan").hide();
+          $("#container-soal").hide();
+          $("#container-konfirmasi-sudah-menjawab-soal").hide();
+          $("#container-hasil").hide();
+      }
+
+      function inisialisasiAwal()
+      {
+          $("#bagian-loading").hide();
+          $("#bagian-ketentuan").show();
+          $("#container-soal").hide();
+          $("#container-konfirmasi-sudah-menjawab-soal").hide();
+          $("#container-hasil").hide();
+          $("#banyak-soal").text(daftarSoal.length);
+      }
+
+      $("#tombol-mulai").click(function(){
+        daftarSoal = new Array();
+        for(var i = 0; i < daftarSoalKeseluruhan.length; i++)
+        {
+            if(daftarSoalKeseluruhan[i]['level'] == $("#daftar-level").prop("value"))
+                daftarSoal.push(daftarSoalKeseluruhan[i]);
+        }
+
+        daftarJawaban = new Array();
+        var angkaNilaiSoal = 0;
+        $("[id='tombol-nomor-soal']").unbind("click");
+        $("[id='tombol-nomor-soal']").remove();
+        for(var i = 0; i < daftarSoal.length; i++)
+        {
+          daftarJawaban.push(-1);
+          $("#isi-nomor-soal").append('<a id="tombol-nomor-soal" class="btn btn-primary btn-non-garis">' + (i + 1).toString() + '</a>');
+          /*angkaNilaiSoal += 1;
+          if(angkaNilaiSoal == 5)
+          {
+              angkaNilaiSoal = 0;
+              if(i != daftarSoal.length - 1)
+                  $("#isi-nomor-soal").append("<div style='border-top: solid 2px #ef5285'></div>");
+          }*/
+        }
+
+        $("[id='tombol-nomor-soal']").bind("click", function(){
+            indeksSoal = $(this).text() - 1;
+            tampilkanSoal();
+        });
+
+        $("#level-soal").text("Level " + $("#daftar-level").prop("value"));
+
+        $("#container-soal").show();
+        $("#bagian-ketentuan").hide();
+        indeksSoal = 0;
+        tampilkanSoal();
+      });
+
+      $("#tombol-berikutnya").click(function(){
+        indeksSoal += 1;
+        tampilkanSoal();
+      });
+
+      $("#tombol-sebelumnya").click(function(){
+        indeksSoal -= 1;
+        tampilkanSoal();
+      });
+
+      $("#tombol-selesai").click(function(){
+          $("#container-soal").hide();
+          $("#container-konfirmasi-sudah-menjawab-soal").show();
+      });
+
+      $("#tombol-akhiri").click(function(){
+          //Marilah kita cocokan
+          var containerHasil = $("#container-hasil");
+          var pembahasan = containerHasil.find("#pembahasan");
+          pembahasan.empty();
+          var salah = 0;
+          var benar = 0;
+          var nilai = 0;
+          var htmlPembahasanSoal = new Array();
+          var totalSoal = daftarSoal.length;
+          for(var i = 0; i < daftarJawaban.length; i++)
+          {
+              var teksJawabanAnda = "";
+              var kesimpulan = "";
+              if(daftarJawaban[i] < 0)
+              {
+                  teksJawabanAnda = "Tidak dijawab";
+                  salah += 1;
+                  kesimpulan = "Salah";
+              }
+              else
+              {
+                  teksJawabanAnda = daftarSoal[i]["pilihan" + (daftarJawaban[i] + 1).toString()];
+                  if(teksJawabanAnda == daftarSoal[i]["jawaban"])
+                  {
+                      benar += 1;
+                      kesimpulan = "Benar";
+                  }
+                  else
+                  {
+                      salah += 1;
+                      kesimpulan = "Salah";
+                  }
+              }
+
+              var statusLabel = kesimpulan == "Benar" ? "success" : "danger";
+
+              //Tuangkan ke dalam pembahasan
+              pembahasan.append("<tr>");
+              pembahasan.append("<td>" + (i + 1).toString() + "</td>")
+              pembahasan.append("<td>" + daftarSoal[i]["soal"] + "</td>");
+              pembahasan.append("<td>" + daftarSoal[i]["pilihan1"] + "</td>");
+              pembahasan.append("<td>" + daftarSoal[i]["pilihan2"] + "</td>");
+              pembahasan.append("<td>" + daftarSoal[i]["pilihan3"] + "</td>");
+              pembahasan.append("<td>" + teksJawabanAnda + "</td>");
+              pembahasan.append("<td>" + daftarSoal[i]["jawaban"] + "</td>");
+              pembahasan.append("<td><span class='label label-" + statusLabel + "'>" + kesimpulan + "</td>");
+          }
+
+          //Hasil akhir
+          nilai = 100 * benar / totalSoal;
+
+          containerHasil.find("#kesimpulan").text(nilai < kkm ? "You lose this level, Please retry again" : "Conglatulation you win, keep that up");
+          containerHasil.find("#salah").text(salah);
+          containerHasil.find("#benar").text(benar);
+          containerHasil.find("#nilai").text(nilai);
+
+          $("#container-konfirmasi-sudah-menjawab-soal").hide();
+          $("#container-hasil").show();
+      });
+
+      $("#tombol-kembali").click(function(){
+          $("#container-soal").show();
+          $("#container-konfirmasi-sudah-menjawab-soal").hide();
+      });
+
+      $("#tombol-lakukan-simulasi-lagi").click(function(){
+          inisialisasiAwal();
+      });
+
+      $("input[name='pilihan-soal']").click(function(){
+        var jawaban = $("input[name='pilihan-soal']:checked").val();
+        daftarJawaban[indeksSoal] = $("input[name='pilihan-soal']").index($("input[name='pilihan-soal']:checked"));
+        $("[id='tombol-nomor-soal']:eq(" + indeksSoal + ")").attr("class", "btn btn-success");
+      });
+
+      function tampilkanSoal()
+      {
+          if(indeksSoal > daftarSoal.length - 1) indeksSoal = daftarSoal.length - 1;
+          else if (indeksSoal < 0) indeksSoal = 0;
+          var nomorSoalSekarang = (indeksSoal + 1).toString();
+          $("#isi-soal").text(nomorSoalSekarang + ". " + daftarSoal[indeksSoal].soal);
+          $("label[name='pilihan-soal'][id='1']").find("span").text(daftarSoal[indeksSoal].pilihan1);
+          $("label[name='pilihan-soal'][id='1']").find("input").val(daftarSoal[indeksSoal].pilihan1);
+          $("label[name='pilihan-soal'][id='2']").find("span").text(daftarSoal[indeksSoal].pilihan2);
+          $("label[name='pilihan-soal'][id='2']").find("input").val(daftarSoal[indeksSoal].pilihan2);
+          $("label[name='pilihan-soal'][id='3']").find("span").text(daftarSoal[indeksSoal].pilihan3);
+          $("label[name='pilihan-soal'][id='3']").find("input").val(daftarSoal[indeksSoal].pilihan3);
+          $("input[name='pilihan-soal']").prop("checked", false);
+          if(daftarJawaban[indeksSoal] > -1)
+          {
+              var pilihan = $("input[name='pilihan-soal']:eq(" + daftarJawaban[indeksSoal] + ")");
+              pilihan.prop("checked", true);
+          }
+      }
+    </script>
+  </body>
+</html>
