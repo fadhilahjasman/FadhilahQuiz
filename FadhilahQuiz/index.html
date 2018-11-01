@@ -56,9 +56,9 @@
               <div class="form-group">
                 <input id="username" type="text" placeholder="username" class="form-control">
               </div>
-              <div class="form-group">
+              <!--<div class="form-group">
                 <input id="password" type="password" placeholder="password" class="form-control">
-              </div>
+              </div>-->
               <p class="text-center">
                 <button type="button" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
               </p>
@@ -128,7 +128,9 @@
         {
             return function(){
                 var username = $("#login-modal").find("#username").val();
-                var password = $("#login-modal").find("#password").val();
+                $.cookie("username", username, { expires: 9999, path: '/' });
+                window.location.replace("/fadhilahquiz/simulasi.html");
+                /*var password = $("#login-modal").find("#password").val();
                 if((username == "fadhilahcantik" && password == "123") ||
                   (username == "cecan" && password == "cecan") ||
                   (username == "facan" && password == "facan"))
@@ -137,7 +139,7 @@
                     window.location.replace("/fadhilahquiz/simulasi.html");
                 }
                 else
-                    alert('Username dan/atau password salah.');
+                    alert('Username dan/atau password salah.');*/
             }
         }
     </script>
